@@ -1,0 +1,55 @@
+{
+  "name": "ErrorExercise",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "22fed9a5-448a-4991-a3eb-a4effdcb4132",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://github.com/emoliga",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "13bfe748-1a61-4db3-9dc4-81e81e11de93",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ea02cff9-dfe2-45a1-a247-b60afaad7aa3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b9b769edd2350d4521d0ae849ccbc62e94df2749e3c68d373af1672f76321ec9"
+  },
+  "id": "cNqYQgtonEWpoLeC",
+  "tags": []
+}

@@ -1,0 +1,104 @@
+{
+  "name": "MergeExercise",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        112
+      ],
+      "id": "03af0d16-d32e-441e-8a23-7c0b9fd0d502",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "getAllPeople"
+      },
+      "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "e9543f04-4221-482f-88f7-14d2d5a9d112",
+      "name": "Customer Datastore (n8n training)"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        432,
+        128
+      ],
+      "id": "726d2dca-b20c-4732-a882-2d7e0b493d21",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Group items by user ID and calculate total amount\nconst grouped = {};\n\nfor (const item of items) {\n  const userId = item.json.id;  // Assuming 'id' is the user ID from the merged data\n  if (!grouped[userId]) {\n    // Initialize with user details and a total starting at 0\n    grouped[userId] = {\n      id: item.json.id,\n      name: item.json.name,  // Include other user fields as needed\n      total: 0\n    };\n  }\n  // Add the order amount to the total\n  grouped[userId].total += item.json.amount;\n}\n\n// Return one item per user with the aggregated total\nreturn Object.values(grouped).map(user => ({ json: user }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        256
+      ],
+      "id": "d108f2b5-b5cd-4ab7-a0f2-dd53d3fb7fac",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Customer Datastore (n8n training)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Customer Datastore (n8n training)": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "de19a7b3-d1ab-4c9e-a8f0-44b7765123b9",
+  "meta": {
+    "instanceId": "b9b769edd2350d4521d0ae849ccbc62e94df2749e3c68d373af1672f76321ec9"
+  },
+  "id": "ItBbVa7VZf4wkc1r",
+  "tags": []
+}

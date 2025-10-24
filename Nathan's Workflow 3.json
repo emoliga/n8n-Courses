@@ -1,0 +1,62 @@
+{
+  "name": "Nathan's Workflow 3",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0562a150-8842-47c0-9b74-678450d84dd7",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=The workflow {{ $json.workflow.name }} failed, with the error message: {{ $json.execution.error.message }}. Last node executed: {{ $json.execution.lastNodeExecuted }}. Check this workflow execution here: {{ $json.execution.url }}. My Unique ID: 6c2b841ec7090d46b7c2bcf88bf3c4c2",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1966ff60-c0c7-48ab-b3e7-0f0ce68b150a",
+      "name": "Discord",
+      "webhookId": "dbc4fcf9-14aa-470a-a1af-87d0176c32ec",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "xGCkQUbg5mREiTtQ",
+          "name": "Discord Webhook account Level2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c21ed345-26b8-4cc8-a13c-0bb883b34000",
+  "meta": {
+    "instanceId": "b9b769edd2350d4521d0ae849ccbc62e94df2749e3c68d373af1672f76321ec9"
+  },
+  "id": "qRSuP1KHfHyvi2Bu",
+  "tags": []
+}
